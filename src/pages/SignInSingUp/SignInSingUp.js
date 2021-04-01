@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faUser, faComment } from "@fortawesome/free-solid-svg-icons";
+import {
+    faAddressCard,
+    faUser,
+    faComment,
+    faPlay,
+} from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import SignInForm from "../../components/SignInForm/SignInForm";
@@ -10,7 +15,8 @@ import LogoWhiteChattag from "../../assets/png/chat_tag.png";
 
 import "./SignInSingUp.scss";
 
-export default function SignInSingUp() {
+export default function SignInSingUp(props) {
+    const { setRefreshCheckLogin } = props;
     const [showModal, setshowModal] = useState(false);
     const [contentModal, setContentModal] = useState(null);
 
@@ -30,6 +36,7 @@ export default function SignInSingUp() {
         <
         Rightcomponents openModal = { openModal }
         setshowModal = { setshowModal }
+        setRefreshCheckLogin = { setRefreshCheckLogin }
         />{" "} <
         /Row>{" "} <
         /Container>{" "} <
@@ -49,21 +56,21 @@ function Leftcomponents() {
         <
         h2 >
         <
-        FontAwesomeIcon icon = { faSearch }
+        FontAwesomeIcon icon = { faComment }
         />
-        El poder de la interacción. { " " } <
+        Intensifica y personaliza tus interacciones. { " " } <
+        /h2>{" "} <
+        h2 >
+        <
+        FontAwesomeIcon icon = { faPlay }
+        />
+        Disfruta y comparte tu contenido favorito, tanto de amigos como de tus paginas favoritas. { " " } <
         /h2>{" "} <
         h2 >
         <
         FontAwesomeIcon icon = { faUser }
         />
-        Comparte y dale Like a lo que más te guste. { " " } <
-        /h2>{" "} <
-        h2 >
-        <
-        FontAwesomeIcon icon = { faComment }
-        />
-        Enterate de lo que está hablando la gente. { " " } <
+        Disfruta de una forma más rapida, ágil y personalizada de interactuar con nuevas personas o tus amigos de siempre. { " " } <
         /h2>{" "} <
         /div>{" "} <
         /Col>
@@ -71,7 +78,7 @@ function Leftcomponents() {
 }
 
 function Rightcomponents(props) {
-    const { openModal, setshowModal } = props;
+    const { openModal, setshowModal, setRefreshCheckLogin } = props;
     return ( <
             Col className = "signin-signup__right"
             xs = { 6 } >
@@ -81,7 +88,9 @@ function Rightcomponents(props) {
             img src = { LogoWhiteChattag }
             alt = "Chattag" / >
             <
-            h2 > Observa lo que esta pasando en el mundo en este momento < /h2>{" "} <
+            h2 > { " " }
+            No te pierdas de lo que están haciendo tus amigos y de los contenidos más vistos en este momento { " " } <
+            /h2>{" "} <
             h3 > Únete a Chat - Tag < /h3>{" "} <
             Button variant = "primary"
             onClick = {
@@ -91,7 +100,12 @@ function Rightcomponents(props) {
                     /Button>{" "} <
                     Button variant = "outline-primary"
                     onClick = {
-                        () => openModal( < SignInForm / > ) } >
+                        () =>
+                        openModal( <
+                            SignInForm setRefreshCheckLogin = { setRefreshCheckLogin }
+                            />
+                        )
+                    } >
                     Iniciar Sesión { " " } <
                     /Button>{" "} <
                     /div>{" "} <
